@@ -1,10 +1,34 @@
-from mojo.events import BaseEventTool, addObserver, removeObserver, extractNSEvent, installTool
+from mojo.events import BaseEventTool, addObserver, removeObserver, extractNSEvent, installTool, setActiveEventTool, getActiveEventTool, setActiveEventToolByIndex
 import mojo.drawingTools as dt
 from lib.tools.defaults import getDefaultColor
 from mojo.UI import UpdateCurrentGlyphView
 from mojo.extensions import ExtensionBundle
 from AppKit import NSColor, NSImage
 import math
+
+
+
+class KeyWatcherHelper:
+    """
+    Watch for a keyboard shortcut, and then activate the tool by name
+    """
+    
+    def __init__(self):
+        addObserver(self, "keyDown", "keyDown")
+        
+    def keyDown(self, event):
+        event = extractNSEvent(event)
+        if event["commandDown"] and event["shiftDown"] and event["keyDown"] == "r":
+            currentTool = getActiveEventTool()
+            if not currentTool.__class__ == SlightlyBetterTransformTool:
+                # Switch to the tool
+                setActiveEventTool("SlightlyBetterTransformTool")
+            else:
+                # The tool was already active, switch back to the Edit tool
+                setActiveEventToolByIndex(0)
+            
+KeyWatcherHelper()
+
 
 
 class SlightlyBetterTransformTool(BaseEventTool):
@@ -98,7 +122,7 @@ class SlightlyBetterTransformTool(BaseEventTool):
     def glyphDidUndo(self, info):
         self.updateBounds()
         
-    
+        
     def keyDown(self, event):
         modifiers = self.getModifiers()
         event = extractNSEvent(event)

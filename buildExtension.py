@@ -13,7 +13,7 @@ resourcesPath = os.path.join(basePath, "resources")
 B = ExtensionBundle()
 
 B.name = "Slightly Better Transform"
-B.version = "1.0"
+B.version = "1.1"
 B.mainScript = "SlightlyBetterTransform.py"
 
 B.developer = "Andy Clymer"
@@ -22,7 +22,7 @@ B.developerURL = 'http://www.andyclymer.com/'
 B.launchAtStartUp = True
 B.addToMenu = []
 B.requiresVersionMajor = '3'
-B.requiresVersionMinor = '0'
+B.requiresVersionMinor = '1'
 B.infoDictionary["html"] = True
 
 B.save(extensionPath, libPath=libPath, htmlPath=htmlPath, resourcesPath=resourcesPath, pycOnly=False)
