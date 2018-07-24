@@ -13,7 +13,7 @@ resourcesPath = os.path.join(basePath, "resources")
 B = ExtensionBundle()
 
 B.name = "Slightly Better Transform"
-B.version = "1.11"
+B.version = "1.2"
 B.mainScript = "SlightlyBetterTransform.py"
 
 B.developer = "Andy Clymer"
