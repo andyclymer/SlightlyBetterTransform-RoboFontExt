@@ -6,6 +6,9 @@ from mojo.extensions import ExtensionBundle
 from AppKit import NSColor, NSImage
 import math
 
+# RF Version Check
+from mojo.roboFont import version
+RF3 = version[0] > "1"
 
 
 class KeyWatcherHelper:
@@ -387,4 +390,5 @@ class SlightlyBetterTransformTool(BaseEventTool):
         else: return False
     
 
-installTool(SlightlyBetterTransformTool())
+if RF3:
+    installTool(SlightlyBetterTransformTool())
